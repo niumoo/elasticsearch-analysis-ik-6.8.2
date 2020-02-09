@@ -6,8 +6,7 @@ import org.apache.logging.log4j.spi.ExtendedLogger;
 
 public class ESPluginLoggerFactory {
 
-    private ESPluginLoggerFactory() {
-    }
+    private ESPluginLoggerFactory() {}
 
     static public Logger getLogger(String name) {
         return getLogger("", LogManager.getLogger(name));
@@ -22,6 +21,7 @@ public class ESPluginLoggerFactory {
     }
 
     static public Logger getLogger(String prefix, Logger logger) {
-        return (Logger)(prefix != null && prefix.length() != 0 ? new PrefixPluginLogger((ExtendedLogger)logger, logger.getName(), prefix) : logger);
+        return (Logger)(prefix != null && prefix.length() != 0
+            ? new PrefixPluginLogger((ExtendedLogger)logger, logger.getName(), prefix) : logger);
     }
 }
