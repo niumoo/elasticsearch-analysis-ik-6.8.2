@@ -30,8 +30,11 @@ public class Configuration {
     // 是否是本地测试模式
     private boolean isLocal = false;
 
-    // 是否保留特殊字符
-    private boolean useSpecialSymbol = false;
+    // 是否使用单字分词，保留特殊字符,
+    private boolean useSingleSegmenter = false;
+
+    // 是否使用二分分词器
+    private boolean useTwoSegmenter = false;
 
     @Inject
     public Configuration(Environment env, Settings settings) {
@@ -94,11 +97,19 @@ public class Configuration {
         isLocal = local;
     }
 
-    public boolean isUseSpecialSymbol() {
-        return useSpecialSymbol;
+    public boolean isUseSingleSegmenter() {
+        return useSingleSegmenter;
     }
 
-    public void setUseSpecialSymbol(boolean useSpecialSymbol) {
-        this.useSpecialSymbol = useSpecialSymbol;
+    public void setUseSingleSegmenter(boolean useSingleSegmenter) {
+        this.useSingleSegmenter = useSingleSegmenter;
+    }
+
+    public boolean isUseTwoSegmenter() {
+        return useTwoSegmenter;
+    }
+
+    public void setUseTwoSegmenter(boolean useTwoSegmenter) {
+        this.useTwoSegmenter = useTwoSegmenter;
     }
 }

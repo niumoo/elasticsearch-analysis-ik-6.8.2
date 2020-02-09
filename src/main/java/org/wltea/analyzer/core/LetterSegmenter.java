@@ -92,7 +92,7 @@ class LetterSegmenter implements ISegmenter {
         bufferLockFlag = this.processEnglishLetter(context) || bufferLockFlag;
         // 处理阿拉伯字母
         bufferLockFlag = this.processArabicLetter(context) || bufferLockFlag;
-        if (!context.getCfg().isUseSpecialSymbol()) {
+        if (!context.getCfg().isUseSingleSegmenter() && !context.getCfg().isUseTwoSegmenter()) {
             // 处理混合字母(这个要放最后处理，可以通过QuickSortSet排除重复)
             bufferLockFlag = this.processMixLetter(context) || bufferLockFlag;
         }

@@ -95,6 +95,13 @@ class AnalyzeContext {
         return this.charTypes[this.cursor];
     }
 
+    int getNextCharType() {
+        if (this.charTypes.length < this.cursor + 1) {
+            return CharacterUtil.CHAR_USELESS;
+        }
+        return this.charTypes[this.cursor + 1];
+    }
+
     int getBufferOffset() {
         return this.buffOffset;
     }
@@ -134,7 +141,10 @@ class AnalyzeContext {
     void initCursor() {
         this.cursor = 0;
         this.segmentBuff[this.cursor] = CharacterUtil.regularize(this.segmentBuff[this.cursor], cfg.isEnableLowercase());
-        this.charTypes[this.cursor] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor], this.cfg.isUseSpecialSymbol());
+        this.charTypes[this.cursor] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor], this.cfg);
+        if (cfg.isUseTwoSegmenter() && this.cursor+1 < this.available){
+            this.charTypes[this.cursor+1] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor+1], this.cfg);
+        }
     }
 
     /**
@@ -146,7 +156,10 @@ class AnalyzeContext {
         if (this.cursor < this.available - 1) {
             this.cursor++;
             this.segmentBuff[this.cursor] = CharacterUtil.regularize(this.segmentBuff[this.cursor], cfg.isEnableLowercase());
-            this.charTypes[this.cursor] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor], this.cfg.isUseSpecialSymbol());
+            this.charTypes[this.cursor] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor], this.cfg);
+            if (cfg.isUseTwoSegmenter() && this.cursor+1 < this.available){
+                this.charTypes[this.cursor+1] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor+1], this.cfg);
+            }
             return true;
         } else {
             return false;
@@ -301,6 +314,9 @@ class AnalyzeContext {
      * @param index
      */
     private void outputSingleCJK(int index) {
+        if(cfg.isUseTwoSegmenter()){
+            return;
+        }
         if (CharacterUtil.CHAR_CHINESE == this.charTypes[index]) {
             Lexeme singleCharLexeme = new Lexeme(this.buffOffset, index, 1, Lexeme.TYPE_CNCHAR);
             this.results.add(singleCharLexeme);
