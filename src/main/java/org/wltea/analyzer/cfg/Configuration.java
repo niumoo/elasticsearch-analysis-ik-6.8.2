@@ -30,6 +30,9 @@ public class Configuration {
 	// 是否是本地测试模式
 	private boolean isLocal = false;
 
+	// 是否保留特殊字符
+    private boolean useSpecialSymbol = false;
+
 
 	@Inject
 	public Configuration(Environment env,Settings settings) {
@@ -92,4 +95,12 @@ public class Configuration {
 	public void setLocal(boolean local) {
 		isLocal = local;
 	}
+
+    public boolean isUseSpecialSymbol() {
+        return useSpecialSymbol;
+    }
+
+    public void setUseSpecialSymbol(boolean useSpecialSymbol) {
+        this.useSpecialSymbol = useSpecialSymbol;
+    }
 }
