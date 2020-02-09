@@ -31,11 +31,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.Files;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.*;
@@ -103,8 +100,13 @@ public class Dictionary {
 	private Dictionary(Configuration cfg) {
 		this.configuration = cfg;
 		this.props = new Properties();
-		this.conf_dir = cfg.getEnvironment().configFile().resolve(AnalysisIkPlugin.PLUGIN_NAME);
-		Path configFile = conf_dir.resolve(FILE_NAME);
+		this.conf_dir = Paths.get("config");
+        if (cfg.isLocal()) {
+            this.conf_dir = Paths.get("config");
+        } else {
+            this.conf_dir = cfg.getEnvironment().configFile().resolve(AnalysisIkPlugin.PLUGIN_NAME);
+        }
+        Path configFile = conf_dir.resolve(FILE_NAME);
 
 		InputStream input = null;
 		try {

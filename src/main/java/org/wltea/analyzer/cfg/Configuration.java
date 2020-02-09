@@ -27,19 +27,31 @@ public class Configuration {
 	//是否启用小写处理
 	private boolean enableLowercase=true;
 
+	// 是否是本地测试模式
+	private boolean isLocal = false;
+
 
 	@Inject
 	public Configuration(Environment env,Settings settings) {
 		this.environment = env;
 		this.settings=settings;
-
 		this.useSmart = settings.get("use_smart", "false").equals("true");
 		this.enableLowercase = settings.get("enable_lowercase", "true").equals("true");
 		this.enableRemoteDict = settings.get("enable_remote_dict", "true").equals("true");
-
 		Dictionary.initial(this);
-
 	}
+
+    /**
+     *
+     * 本地测试时可以使用的构造器
+     * 
+     * @param use_smart 是否智能分词
+     */
+    public Configuration(boolean use_smart) {
+        this.useSmart = use_smart;
+        this.isLocal = true;
+        Dictionary.initial(this);
+    }
 
 	public Path getConfigInPluginDir() {
 		return PathUtils
@@ -71,5 +83,13 @@ public class Configuration {
 
 	public boolean isEnableLowercase() {
 		return enableLowercase;
+	}
+
+	public boolean isLocal() {
+		return isLocal;
+	}
+
+	public void setLocal(boolean local) {
+		isLocal = local;
 	}
 }
