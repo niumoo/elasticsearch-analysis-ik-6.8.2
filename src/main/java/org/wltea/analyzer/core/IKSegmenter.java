@@ -81,7 +81,11 @@ public final class IKSegmenter {
         // 处理中文数量词的子分词器
         segmenters.add(new CN_QuantifierSegmenter());
         // 处理中文词的子分词器
-        segmenters.add(new CJKSegmenter());
+        if (configuration.isUseSpecialSymbol()) {
+            segmenters.add(new CJKSingleSegmenter());
+        } else {
+            segmenters.add(new CJKSegmenter());
+        }
         return segmenters;
     }
 

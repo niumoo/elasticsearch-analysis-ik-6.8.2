@@ -394,4 +394,8 @@ class AnalyzeContext {
         }
     }
 
+    public Configuration getCfg(){
+        return this.cfg;
+    }
+
 }
