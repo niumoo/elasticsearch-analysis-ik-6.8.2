@@ -19,9 +19,12 @@ public class AnalysisIkPlugin extends Plugin implements AnalysisPlugin {
     @Override
     public Map<String, AnalysisModule.AnalysisProvider<TokenizerFactory>> getTokenizers() {
         Map<String, AnalysisModule.AnalysisProvider<TokenizerFactory>> extra = new HashMap<>();
+        // IK 自带 分词器
+        // extra.put("ik_smart", IkTokenizerFactory::getIkSmartTokenizerFactory);
+        // extra.put("ik_max_word", IkTokenizerFactory::getIkTokenizerFactory);
 
-        extra.put("ik_smart", IkTokenizerFactory::getIkSmartTokenizerFactory);
-        extra.put("ik_max_word", IkTokenizerFactory::getIkTokenizerFactory);
+        extra.put("ik_max_word", IkTokenizerFactory::getSingleTokenizerFactory);
+        extra.put("cjk", IkTokenizerFactory::getTwoTokenizerFactory);
 
         return extra;
     }
@@ -29,9 +32,12 @@ public class AnalysisIkPlugin extends Plugin implements AnalysisPlugin {
     @Override
     public Map<String, AnalysisModule.AnalysisProvider<AnalyzerProvider<? extends Analyzer>>> getAnalyzers() {
         Map<String, AnalysisModule.AnalysisProvider<AnalyzerProvider<? extends Analyzer>>> extra = new HashMap<>();
+        // IK 自带 分词器
+        // extra.put("ik_smart", IkAnalyzerProvider::getIkSmartAnalyzerProvider);
+        // extra.put("ik_max_word", IkAnalyzerProvider::getIkAnalyzerProvider);
 
-        extra.put("ik_smart", IkAnalyzerProvider::getIkSmartAnalyzerProvider);
-        extra.put("ik_max_word", IkAnalyzerProvider::getIkAnalyzerProvider);
+        extra.put("ik_max_word", IkAnalyzerProvider::getIkSingleAnalyzerProvider);
+        extra.put("cjk", IkAnalyzerProvider::getIkTwoAnalyzerProvider);
 
         return extra;
     }

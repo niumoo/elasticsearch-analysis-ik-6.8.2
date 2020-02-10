@@ -11,9 +11,20 @@ public class IkAnalyzerProvider extends AbstractIndexAnalyzerProvider<IKAnalyzer
 
     public IkAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings, boolean useSmart) {
         super(indexSettings, name, settings);
-
         Configuration configuration = new Configuration(env, settings).setUseSmart(useSmart);
+        analyzer = new IKAnalyzer(configuration);
+    }
 
+    /**
+     * 传入 Configuration 的构造器
+     * 
+     * @param indexSettings
+     * @param name
+     * @param settings
+     * @param configuration
+     */
+    public IkAnalyzerProvider(IndexSettings indexSettings, String name, Settings settings, Configuration configuration) {
+        super(indexSettings, name, settings);
         analyzer = new IKAnalyzer(configuration);
     }
 
@@ -25,6 +36,38 @@ public class IkAnalyzerProvider extends AbstractIndexAnalyzerProvider<IKAnalyzer
     public static IkAnalyzerProvider getIkAnalyzerProvider(IndexSettings indexSettings, Environment env, String name,
         Settings settings) {
         return new IkAnalyzerProvider(indexSettings, env, name, settings, false);
+    }
+
+    /**
+     * 使用单字分词
+     * 
+     * @param indexSettings
+     * @param env
+     * @param name
+     * @param settings
+     * @return
+     */
+    public static IkAnalyzerProvider getIkSingleAnalyzerProvider(IndexSettings indexSettings, Environment env, String name,
+        Settings settings) {
+        Configuration configuration = new Configuration(env, settings);
+        configuration.setUseSingleSegmenter(true);
+        return new IkAnalyzerProvider(indexSettings, name, settings, configuration);
+    }
+
+    /**
+     * 使用单字分词
+     *
+     * @param indexSettings
+     * @param env
+     * @param name
+     * @param settings
+     * @return
+     */
+    public static IkAnalyzerProvider getIkTwoAnalyzerProvider(IndexSettings indexSettings, Environment env, String name,
+        Settings settings) {
+        Configuration configuration = new Configuration(env, settings);
+        configuration.setUseTwoSegmenter(true);
+        return new IkAnalyzerProvider(indexSettings, name, settings, configuration);
     }
 
     @Override
