@@ -1,9 +1,11 @@
 IK Analysis for Elasticsearch
 =============================
+根据自己需求改造的 IK 分词器。
+- 中文单字分词（丢弃大小写格式）
+- 中文单字分词（保留大小写格式）
+- 中文双字分词
 
-The IK Analysis plugin integrates Lucene IK analyzer (http://code.google.com/p/ik-analyzer/) into elasticsearch, support customized dictionary.
-
-Analyzer: `ik_smart` , `ik_max_word` , Tokenizer: `ik_smart` , `ik_max_word`
+Analyzer: `ik_max_style_word` , `ik_max_word` ,`cjk`, Tokenizer: `ik_max_style_word` , `ik_max_word` ,`cjk`
 
 Versions
 --------
@@ -29,28 +31,6 @@ master | 6.x -> master
 1.2.5 | 0.90.x
 1.1.3 | 0.20.x
 1.0.0 | 0.16.2 -> 0.19.0
-
-Install
--------
-
-1.download or compile
-
-* optional 1 - download pre-build package from here: https://github.com/medcl/elasticsearch-analysis-ik/releases
-
-    create plugin folder `cd your-es-root/plugins/ && mkdir ik`
-    
-    unzip plugin to folder `your-es-root/plugins/ik`
-
-* optional 2 - use elasticsearch-plugin to install ( supported from version v5.5.1 ):
-
-    ```
-    ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.3.0/elasticsearch-analysis-ik-6.3.0.zip
-    ```
-
-   NOTE: replace `6.3.0` to your own elasticsearch version
-
-2.restart elasticsearch
-
 
 
 #### Quick Example
@@ -245,24 +225,9 @@ curl -XGET "http://localhost:9200/your_index/_analyze" -H 'Content-Type: applica
 ```
 
 
-4. ik_max_word 和 ik_smart 什么区别?
+4. ik_max_style_word、ik_max_word 和 cjk 什么区别?
 
+ik_max_style_word: 中文会进行单字分词，保留所有格式（大小写）和符号；英文，数字， 正常分词。
+ik_max_word: 中文会进行单字分词，不保留大小写，保留其他格式和符号；英文，数字， 正常分词。
+cjk：中文二字分词，相邻两个字一分，过滤特殊符号；英文，数字， 正常分词。
 
-ik_max_word: 会将文本做最细粒度的拆分，比如会将“中华人民共和国国歌”拆分为“中华人民共和国,中华人民,中华,华人,人民共和国,人民,人,民,共和国,共和,和,国国,国歌”，会穷尽各种可能的组合；
-
-ik_smart: 会做最粗粒度的拆分，比如会将“中华人民共和国国歌”拆分为“中华人民共和国,国歌”。
-
-Changes
-------
-*5.0.0*
-
-- 移除名为 `ik` 的analyzer和tokenizer,请分别使用 `ik_smart` 和 `ik_max_word`
-
-
-Thanks
-------
-YourKit supports IK Analysis for ElasticSearch project with its full-featured Java Profiler.
-YourKit, LLC is the creator of innovative and intelligent tools for profiling
-Java and .NET applications. Take a look at YourKit's leading software products:
-<a href="http://www.yourkit.com/java/profiler/index.jsp">YourKit Java Profiler</a> and
-<a href="http://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler</a>.
