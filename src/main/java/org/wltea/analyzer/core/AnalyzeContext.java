@@ -96,7 +96,7 @@ class AnalyzeContext {
     }
 
     int getNextCharType() {
-        if (this.charTypes.length < this.cursor + 1) {
+        if (this.charTypes.length <= this.cursor + 1) {
             return CharacterUtil.CHAR_USELESS;
         }
         return this.charTypes[this.cursor + 1];
