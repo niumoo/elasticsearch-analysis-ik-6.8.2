@@ -55,6 +55,23 @@ public class IkAnalyzerProvider extends AbstractIndexAnalyzerProvider<IKAnalyzer
     }
 
     /**
+     * 使用单字分词，保留大小写格式
+     *
+     * @param indexSettings
+     * @param env
+     * @param name
+     * @param settings
+     * @return
+     */
+    public static IkAnalyzerProvider getIkSingleStyleAnalyzerProvider(IndexSettings indexSettings, Environment env, String name,
+                                                                 Settings settings) {
+        Configuration configuration = new Configuration(env, settings);
+        configuration.setUseSingleSegmenter(true);
+        configuration.setEnableLowercase(false);
+        return new IkAnalyzerProvider(indexSettings, name, settings, configuration);
+    }
+
+    /**
      * 使用单字分词
      *
      * @param indexSettings

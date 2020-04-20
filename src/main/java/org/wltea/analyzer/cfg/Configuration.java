@@ -33,7 +33,7 @@ public class Configuration {
     // 是否使用单字分词，保留特殊字符,
     private boolean useSingleSegmenter = false;
 
-    // 是否使用二分分词器
+    // 是否使用二分分词器，英文，汉字，符号除外
     private boolean useTwoSegmenter = false;
 
     @Inject
@@ -87,6 +87,10 @@ public class Configuration {
 
     public boolean isEnableLowercase() {
         return enableLowercase;
+    }
+
+    public void setEnableLowercase(boolean enableLowercase) {
+        this.enableLowercase = enableLowercase;
     }
 
     public boolean isLocal() {
