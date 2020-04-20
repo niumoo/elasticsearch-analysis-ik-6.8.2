@@ -142,8 +142,8 @@ class AnalyzeContext {
         this.cursor = 0;
         this.segmentBuff[this.cursor] = CharacterUtil.regularize(this.segmentBuff[this.cursor], cfg.isEnableLowercase());
         this.charTypes[this.cursor] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor], this.cfg);
-        if (cfg.isUseTwoSegmenter() && this.cursor+1 < this.available){
-            this.charTypes[this.cursor+1] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor+1], this.cfg);
+        if (cfg.isUseTwoSegmenter() && this.cursor + 1 < this.available) {
+            this.charTypes[this.cursor + 1] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor + 1], this.cfg);
         }
     }
 
@@ -157,8 +157,8 @@ class AnalyzeContext {
             this.cursor++;
             this.segmentBuff[this.cursor] = CharacterUtil.regularize(this.segmentBuff[this.cursor], cfg.isEnableLowercase());
             this.charTypes[this.cursor] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor], this.cfg);
-            if (cfg.isUseTwoSegmenter() && this.cursor+1 < this.available){
-                this.charTypes[this.cursor+1] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor+1], this.cfg);
+            if (cfg.isUseTwoSegmenter() && this.cursor + 1 < this.available) {
+                this.charTypes[this.cursor + 1] = CharacterUtil.identifyCharType(this.segmentBuff[this.cursor + 1], this.cfg);
             }
             return true;
         } else {
@@ -314,7 +314,7 @@ class AnalyzeContext {
      * @param index
      */
     private void outputSingleCJK(int index) {
-        if(cfg.isUseTwoSegmenter()){
+        if (cfg.isUseTwoSegmenter()) {
             return;
         }
         if (CharacterUtil.CHAR_CHINESE == this.charTypes[index]) {
@@ -339,14 +339,14 @@ class AnalyzeContext {
         while (result != null) {
             // 数量词合并
             this.compound(result);
-            if (Dictionary.getSingleton().isStopWord(this.segmentBuff, result.getBegin(), result.getLength())) {
-                // 是停止词继续取列表的下一个
-                result = this.results.pollFirst();
-            } else {
-                // 不是停止词, 生成lexeme的词元文本,输出
-                result.setLexemeText(String.valueOf(segmentBuff, result.getBegin(), result.getLength()));
-                break;
-            }
+            // if (Dictionary.getSingleton().isStopWord(this.segmentBuff, result.getBegin(), result.getLength())) {
+            // 是停止词继续取列表的下一个
+            // result = this.results.pollFirst();
+            // } else {
+            // 不是停止词, 生成lexeme的词元文本,输出
+            result.setLexemeText(String.valueOf(segmentBuff, result.getBegin(), result.getLength()));
+            break;
+            // }
         }
         return result;
     }
@@ -410,7 +410,7 @@ class AnalyzeContext {
         }
     }
 
-    public Configuration getCfg(){
+    public Configuration getCfg() {
         return this.cfg;
     }
 
