@@ -228,6 +228,8 @@ curl -XGET "http://localhost:9200/your_index/_analyze" -H 'Content-Type: applica
 4. ik_max_style_word、ik_max_word 和 cjk 什么区别?
 
 ik_max_style_word: 中文会进行单字分词，保留所有格式（大小写）和符号；英文，数字， 正常分词。
+
 ik_max_word: 中文会进行单字分词，不保留大小写，保留其他格式和符号；英文，数字， 正常分词。
+
 cjk：中文二字分词，相邻两个字一分，过滤特殊符号；英文，数字， 正常分词。
 
