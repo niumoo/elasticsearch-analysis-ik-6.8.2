@@ -18,11 +18,14 @@ public class TestIk {
         // String text = "￥中华人民共和国的也￥%……&*， 阿斯达1231^&*1";
         // String text = "中华abc人民共￥和1231国的Hello WORld java";
         // String text = "外一个阶段三十岁了";
-        String text = "这是三十万年前";
+        // String text = "这是三十万年前";
+        String text = "这是三十万八千四百七，？！十@#!二年前1231国的Hello WORld java";
+        // String text = " java";
         Configuration configuration = new Configuration(false);
         // configuration.setUseSingleSegmenter(true);
         configuration.setUseTwoSegmenter(true);
-        // configuration.setAllWord(true);
+        // configuration.setUseSingleSegmenter(true);
+        // configuration.setCleanSpace(true);
         // 创建分词对象
         Analyzer ikAnalyzer = new IKAnalyzer(configuration);
         StringReader reader = new StringReader(text);
