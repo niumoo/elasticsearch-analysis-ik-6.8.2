@@ -1,0 +1,10 @@
+/data
+/work
+/logs
+/.idea
+/target
+/out
+.DS_Store
+*.iml
+\.*
+!.travis.yml
