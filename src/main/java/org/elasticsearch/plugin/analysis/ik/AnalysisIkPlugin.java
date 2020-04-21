@@ -29,7 +29,7 @@ public class AnalysisIkPlugin extends Plugin implements AnalysisPlugin {
         extra.put("cjk_single_en_style_clean_space", IkTokenizerFactory::getCjkSingleEnStyleCleanSpace);
         // 中日韩文单字分词，英文小写分词，符号保留，空格过滤。
         extra.put("cjk_single_en_lowcase_clean_space", IkTokenizerFactory::getCjkSingleEnLowcaseCleanSpace);
-        // 中日韩文二分分词，英文正常分词，符号和空格过滤。
+        // 中日韩文二分分词，英文小写分词，符号和空格过滤。
         extra.put("cjk", IkTokenizerFactory::getTwoTokenizerFactory);
 
         return extra;
@@ -48,7 +48,7 @@ public class AnalysisIkPlugin extends Plugin implements AnalysisPlugin {
         extra.put("cjk_single_en_style_clean_space", IkAnalyzerProvider::getCjkSingleEnStyleCleanSpaceAnalyzerProvider);
         // 中日韩文单字分词，英文小写分词，符号保留，空格过滤。
         extra.put("cjk_single_en_lowcase_clean_space", IkAnalyzerProvider::getCjkSingleEnLowcaseCleanSpaceAnalyzerProvider);
-        // 中日韩文二分分词，英文正常分词，符号和空格过滤。
+        // 中日韩文二分分词，英文小写分词，符号和空格过滤。
         extra.put("cjk", IkAnalyzerProvider::getIkTwoAnalyzerProvider);
 
         return extra;

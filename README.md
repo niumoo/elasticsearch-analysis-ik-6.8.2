@@ -7,7 +7,7 @@ IK Analysis for Elasticsearch
 ik_max_word | 中日韩文单字分词，英文小写分词，符号和空格保留。
 cjk_single_en_style_clean_space| 中日韩文单字分词，英文保留大小写分词，符号保留，空格过滤。
 cjk_single_en_lowcase_clean_space| 中日韩文单字分词，英文小写分词，符号保留，空格过滤。
-cjk| 中日韩文二分分词，英文正常分词，符号和空格过滤。
+cjk| 中日韩文二分分词，英文小写分词，符号和空格过滤。
 
 Analyzer,Tokenizer 同名。
 
