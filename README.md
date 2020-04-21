@@ -1,36 +1,22 @@
 IK Analysis for Elasticsearch
 =============================
 根据自己需求改造的 IK 分词器。
-- 中文单字分词（丢弃大小写格式）
-- 中文单字分词（保留大小写格式）
-- 中文双字分词
 
-Analyzer: `ik_max_style_word` , `ik_max_word` ,`cjk`, Tokenizer: `ik_max_style_word` , `ik_max_word` ,`cjk`
+分词器名称 | 介绍
+-----------|-----------
+ik_max_word | 中日韩文单字分词，英文小写分词，符号和空格保留。
+cjk_single_en_style_clean_space| 中日韩文单字分词，英文保留大小写分词，符号保留，空格过滤。
+cjk_single_en_lowcase_clean_space| 中日韩文单字分词，英文小写分词，符号保留，空格过滤。
+cjk| 中日韩文二分分词，英文正常分词，符号和空格过滤。
+
+Analyzer,Tokenizer 同名。
 
 Versions
 --------
 
 IK version | ES version
 -----------|-----------
-master | 6.x -> master
-6.3.0| 6.3.0
-6.2.4| 6.2.4
-6.1.3| 6.1.3
-5.6.8| 5.6.8
-5.5.3| 5.5.3
-5.4.3| 5.4.3
-5.3.3| 5.3.3
-5.2.2| 5.2.2
-5.1.2| 5.1.2
-1.10.6 | 2.4.6
-1.9.5 | 2.3.5
-1.8.1 | 2.2.1
-1.7.0 | 2.1.1
-1.5.0 | 2.0.0
-1.2.6 | 1.0.0
-1.2.5 | 0.90.x
-1.1.3 | 0.20.x
-1.0.0 | 0.16.2 -> 0.19.0
+6.8.0| 6.8.x
 
 
 #### Quick Example
@@ -223,13 +209,4 @@ curl -XGET "http://localhost:9200/your_index/_analyze" -H 'Content-Type: applica
    "text":"中华人民共和国MN","tokenizer": "my_ik"
 }'
 ```
-
-
-4. ik_max_style_word、ik_max_word 和 cjk 什么区别?
-
-ik_max_style_word: 中文会进行单字分词，保留所有格式（大小写）和符号；英文，数字， 正常分词。
-
-ik_max_word: 中文会进行单字分词，不保留大小写，保留其他格式和符号；英文，数字， 正常分词。
-
-cjk：中文二字分词，相邻两个字一分，过滤特殊符号；英文，数字， 正常分词。
 

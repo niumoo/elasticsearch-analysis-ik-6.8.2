@@ -55,7 +55,7 @@ public class IkAnalyzerProvider extends AbstractIndexAnalyzerProvider<IKAnalyzer
     }
 
     /**
-     * 使用单字分词，保留大小写格式
+     * 中日韩文单字分词，英文保留大小写分词，符号保留，空格过滤。
      *
      * @param indexSettings
      * @param env
@@ -63,13 +63,34 @@ public class IkAnalyzerProvider extends AbstractIndexAnalyzerProvider<IKAnalyzer
      * @param settings
      * @return
      */
-    public static IkAnalyzerProvider getIkSingleStyleAnalyzerProvider(IndexSettings indexSettings, Environment env, String name,
+    public static IkAnalyzerProvider getCjkSingleEnStyleCleanSpaceAnalyzerProvider(IndexSettings indexSettings, Environment env, String name,
                                                                  Settings settings) {
         Configuration configuration = new Configuration(env, settings);
         configuration.setUseSingleSegmenter(true);
         configuration.setEnableLowercase(false);
+        configuration.setCleanSpace(true);
         return new IkAnalyzerProvider(indexSettings, name, settings, configuration);
     }
+
+    /**
+     * 中日韩文单字分词，英文小写分词，符号保留，空格过滤。
+     *
+     * @param indexSettings
+     * @param env
+     * @param name
+     * @param settings
+     * @return
+     */
+    public static IkAnalyzerProvider getCjkSingleEnLowcaseCleanSpaceAnalyzerProvider(IndexSettings indexSettings, Environment env, String name,
+                                                                                   Settings settings) {
+        Configuration configuration = new Configuration(env, settings);
+        configuration.setUseSingleSegmenter(true);
+        configuration.setEnableLowercase(true);
+        configuration.setCleanSpace(true);
+        return new IkAnalyzerProvider(indexSettings, name, settings, configuration);
+    }
+
+
 
     /**
      * 使用单字分词
