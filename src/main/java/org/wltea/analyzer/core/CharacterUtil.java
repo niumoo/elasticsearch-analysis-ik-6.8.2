@@ -64,7 +64,6 @@ class CharacterUtil {
                 || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A) {
                 // 目前已知的中文字符UTF-8集合
                 return CHAR_CHINESE;
-
             } else if (
             // 韩文字符集
             ub == Character.UnicodeBlock.HANGUL_SYLLABLES || ub == Character.UnicodeBlock.HANGUL_JAMO
@@ -74,6 +73,10 @@ class CharacterUtil {
                 || ub == Character.UnicodeBlock.KATAKANA // 片假名
                 || ub == Character.UnicodeBlock.KATAKANA_PHONETIC_EXTENSIONS) {
                 return CHAR_OTHER_CJK;
+            }
+            // 过滤空格字符
+            if (cfg.isCleanSpace() && (input == ' ' || input == '　')) {
+                return CHAR_USELESS;
             }
             // 全角数字字符和日韩字符
             if (ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS && !cfg.isUseTwoSegmenter()) {

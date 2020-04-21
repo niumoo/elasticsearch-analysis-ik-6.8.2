@@ -36,6 +36,9 @@ public class Configuration {
     // 是否使用二分分词器，英文，汉字，符号除外
     private boolean useTwoSegmenter = false;
 
+    // 是否过滤掉空格符号
+    private boolean cleanSpace = false;
+
     @Inject
     public Configuration(Environment env, Settings settings) {
         this.environment = env;
@@ -115,5 +118,13 @@ public class Configuration {
 
     public void setUseTwoSegmenter(boolean useTwoSegmenter) {
         this.useTwoSegmenter = useTwoSegmenter;
+    }
+
+    public boolean isCleanSpace() {
+        return cleanSpace;
+    }
+
+    public void setCleanSpace(boolean cleanSpace) {
+        this.cleanSpace = cleanSpace;
     }
 }
